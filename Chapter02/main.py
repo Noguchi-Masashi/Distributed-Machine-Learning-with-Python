@@ -5,11 +5,11 @@ from my_net import *
 from worker import *
 from parameter_server import *
 
-train_loader = torch.utils.data.DataLoader(datasets.MNIST('./mnist_data', download=True, train=True,
+train_loader = torch.utils.data.DataLoader(datasets.MNIST('../mnist_data', download=True, train=True,
                transform = transforms.Compose([transforms.ToTensor(), 
                transforms.Normalize((0.1307,),(0.3081,))])),
                batch_size=128, shuffle=True)
-test_loader = torch.utils.data.DataLoader(datasets.MNIST('./mnist_data', download=True, train=False,
+test_loader = torch.utils.data.DataLoader(datasets.MNIST('../mnist_data', download=True, train=False,
               transform = transforms.Compose([transforms.ToTensor(), 
               transforms.Normalize((0.1307,),(0.3081,))])),
               batch_size=128, shuffle=True)
