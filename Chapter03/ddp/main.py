@@ -13,7 +13,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler as DDP_sampler
 
 train_all_set = datasets.MNIST(
-    '../mnist_data',
+    '../../mnist_data',
     download=True,
     train=True,
     transform=transforms.Compose(
@@ -23,7 +23,7 @@ train_all_set = datasets.MNIST(
 train_set, val_set = torch.utils.data.random_split(train_all_set, [50000, 10000])
 
 test_set = datasets.MNIST(
-    '../mnist_data',
+    '../../mnist_data',
     download=True,
     train=False,
     transform=transforms.Compose(

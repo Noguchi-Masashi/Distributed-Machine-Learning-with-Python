@@ -6,7 +6,7 @@ from torchvision import datasets, transforms
 from torch import optim
 
 train_set = datasets.MNIST(
-    '../mnist_data',
+    '../../mnist_data',
     download=True,
     train=True,
     transform=transforms.Compose(
@@ -15,7 +15,7 @@ train_set = datasets.MNIST(
 )
 
 test_set = datasets.MNIST(
-    '../mnist_data',
+    '../../mnist_data',
     download=True,
     train=False,
     transform=transforms.Compose(
@@ -27,12 +27,13 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 train_loader = DataLoader(train_set, batch_size=128, shuffle=True, pin_memory=True)
 
-train_epoch = 2
+train_epoch = 100  # 200 にすると loss が 2.0 から 0.x に減少し，10epoch目から 2.3 に収束していた
 
 
 def main():
     model = MyNet()
     print("Using ", torch.cuda.device_count(), "GPUs for data parallel training")
+    # lr = 5e-4 ＆ momentum=0.9 にするとloss が発散(nan)．なぜ？？
     optimizer = torch.optim.SGD(model.parameters(), lr=5e-4)
     model = nn.DataParallel(model)
     model.to(device)
